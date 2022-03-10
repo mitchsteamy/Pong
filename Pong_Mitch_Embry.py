@@ -7,6 +7,8 @@ import pygame, sys
 
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
+RED = (255,0,0)
+BLUE = (0,0,255)
 
 HEIGHT = 800
 WIDTH = 1000
@@ -149,8 +151,8 @@ class Titles:
 
 #object instances
 ball = Ball(screen, WHITE, WIDTH // 2, HEIGHT // 2, LINE_WEIGHT * 2) 
-p1_paddle = Paddle(screen, WHITE, 10, (HEIGHT // 2 - 10 * LINE_WEIGHT), 2 * LINE_WEIGHT, 20 * LINE_WEIGHT)
-p2_paddle = Paddle(screen, WHITE, WIDTH - 20, (HEIGHT // 2 - 10 * LINE_WEIGHT), 2 * LINE_WEIGHT, 20 * LINE_WEIGHT)
+p1_paddle = Paddle(screen, BLUE, 10, (HEIGHT // 2 - 10 * LINE_WEIGHT), 2 * LINE_WEIGHT, 20 * LINE_WEIGHT)
+p2_paddle = Paddle(screen, RED, WIDTH - 20, (HEIGHT // 2 - 10 * LINE_WEIGHT), 2 * LINE_WEIGHT, 20 * LINE_WEIGHT)
 score = Score_Board()
 titles = Titles()
 
