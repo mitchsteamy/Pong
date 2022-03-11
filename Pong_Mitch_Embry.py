@@ -7,8 +7,8 @@ import pygame, sys
 
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
-RED = (255,0,0)
-BLUE = (0,0,255)
+RED = (200,56,49)
+BLUE = (65,105,225)
 
 HEIGHT = 800
 WIDTH = 1000
@@ -17,13 +17,13 @@ LINE_WEIGHT = 5
 
 # pygame instance
 pygame.init()
-pygame.display.set_caption("Pong 2")
+pygame.display.set_caption("PONG by Mitch Embry")
 clock = pygame.time.Clock()
 
 
 #create screen
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption("PONG")
+pygame.display.set_caption("PONG by Mitch Embry")
 
 def create_screen():
     screen.fill(BLACK)
@@ -51,7 +51,7 @@ class Ball:
         self.y_pos += self.y_vel
 
     def bounce(self):
-        if (self.x_pos + self.x_vel < p1_paddle.x_pos + p1_paddle.width) and (p1_paddle.y_pos < self.y_pos + self.y_vel + self.rad < p1_paddle.y_pos + p1_paddle.height):
+        if (self.x_pos + self.x_vel <= p1_paddle.x_pos + p1_paddle.width) and (p1_paddle.y_pos < self.y_pos + self.y_vel + self.rad < p1_paddle.y_pos + p1_paddle.height):
             self.x_vel = -self.x_vel
             self.y_vel = (p1_paddle.y_pos + p1_paddle.height / 2 - self.y_pos )/15 #test
             self.y_vel = -self.y_vel
@@ -61,7 +61,7 @@ class Ball:
             self.y_pos = HEIGHT / 2
             self.x_vel = 5
             self.y_vel = 0
-        if (self.x_pos + self.x_vel > p2_paddle.x_pos - p2_paddle.width) and (p2_paddle.y_pos < self.y_pos + self.y_vel + self.rad < p2_paddle.y_pos + p2_paddle.height):
+        if (self.x_pos + self.x_vel >= p2_paddle.x_pos - p2_paddle.width) and (p2_paddle.y_pos < self.y_pos + self.y_vel + self.rad < p2_paddle.y_pos + p2_paddle.height):
             self.x_vel = -self.x_vel
             self.y_vel = (p2_paddle.y_pos + p2_paddle.height / 2 - self.y_pos )/ 15 #test
             self.y_vel = -self.y_vel
@@ -111,8 +111,11 @@ class Score_Board:
         pygame.draw.line(screen, WHITE, (WIDTH//2 , 0) , (WIDTH//2 , HEIGHT), 2)
         
         #draw score board
-        self.score = self. game_font.render(F"{str(p1_paddle.score)}   {str(p2_paddle.score)}", False, WHITE )
-        screen.blit(self.score,( (WIDTH // 2) - 60   , HEIGHT // 20))
+        self.score_1 = self. game_font.render(F"{str(p1_paddle.score)}", False, BLUE )
+        self.score_2 = self. game_font.render(F"{str(p2_paddle.score)}", False, RED )
+        screen.blit(self.score_1,((WIDTH // 2) - 60, HEIGHT // 20))
+        screen.blit(self.score_2,((WIDTH // 2) + 28, HEIGHT // 20))
+        
 
 class Titles:
     def __init__(self) -> None:
@@ -125,13 +128,13 @@ class Titles:
 
     def intro(self):
         screen.fill(BLACK)
-        self.intro = self.game_font.render(F"Press the space bar to begin playing.", False, WHITE )
+        self.intro = self.game_font.render(F"Press the space bar to begin playing.", False, WHITE)
         screen.blit(self.intro,(WIDTH // 9 , HEIGHT // 2 - 40))
     
     def win(self):
         global playing
-        self.p1_win = self.game_font.render(F"Player 1 is the winner.", False, WHITE )
-        self.p2_win = self.game_font.render(F"Player 2 is the winner.", False, WHITE )
+        self.p1_win = self.game_font.render(F"Player 1 is the winner.", False, BLUE)
+        self.p2_win = self.game_font.render(F"Player 2 is the winner.", False, RED)
         self.play_again = self.game_font_small.render(F"                    Press the space bar to play again", False, WHITE)
         if p1_paddle.score >= 10:
             screen.fill(BLACK)
@@ -140,6 +143,7 @@ class Titles:
             playing = False
             p1_paddle.y_pos = HEIGHT // 2 - p1_paddle.height // 2
             p2_paddle.y_pos = HEIGHT // 2 - p1_paddle.height // 2
+            playing = False
         elif p2_paddle.score >= 10:
             screen.fill(BLACK)
             screen.blit(self.p2_win,(WIDTH // 4 , HEIGHT // 2 - 85))
