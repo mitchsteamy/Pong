@@ -1,6 +1,5 @@
 #import pygame
-from operator import mul
-from pickle import FALSE, TRUE
+
 import pygame, sys
 
 
