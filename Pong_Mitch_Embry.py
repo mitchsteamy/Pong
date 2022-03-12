@@ -153,8 +153,8 @@ class Score_Board:
         #draw score board
         self.score_1 = self. game_font.render(F"{str(p1_paddle.score)}", False, BLUE )
         self.score_2 = self. game_font.render(F"{str(p2_paddle.score)}", False, RED )
-        screen.blit(self.score_1,((WIDTH // 2) - 60, HEIGHT // 20))
-        screen.blit(self.score_2,((WIDTH // 2) + 28, HEIGHT // 20))
+        screen.blit(self.score_2,((WIDTH // 2) - 60, HEIGHT // 20))
+        screen.blit(self.score_1,((WIDTH // 2) + 28, HEIGHT // 20))
         
 
 class Titles:
